@@ -16,11 +16,17 @@ and outputs are boolean:
 F(u') = x([(m_x - 1)*((1/n)*sum((I'(u'))/(m - 1)))]
 
 this is the F described in the paper
+In essence, this function is a weighted average
 """
 
-def scuffedNet(probs):
-    X = ["brain_tumor", "mild dem", "moderate dem", "non dem", "very dem"]
-    return X[np.argmax(probs)]
+def NoisyOr(probs):
+    """
+    In our case this will always output
+    1 * pmax, because probs in range 0:1
+    """
+    return np.max(probs) * np.ceil(np.average(probs))
 
 # assume this is some sort of network output
-print(scuffedNet([0.1, 0.921, 0.991, 0.111, 0.114]))
+print(NoisyOr([0.1, 0.6, 0.2, 0.1]))
+print(NoisyOr([0.33]))
+
