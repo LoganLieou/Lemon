@@ -1,7 +1,4 @@
 import numpy as np
-from typing import List
-from collections import set
-from math import prod
 
 """
 Program inspired by the paper:
@@ -21,12 +18,9 @@ F(u') = x([(m_x - 1)*((1/n)*sum((I'(u'))/(m - 1)))]
 this is the F described in the paper
 """
 
-def BoolOR(probs):
-    return 1 - prod(probs)
+def scuffedNet(probs):
+    X = ["brain_tumor", "mild dem", "moderate dem", "non dem", "very dem"]
+    return X[np.argmax(probs)]
 
-def NoisyOr(probs: List[float], X: List[str]):
-    # want to map from our U' probs to X categories
-    s = set()
-    X = zip(range(len(X)), X)
-
-print(BoolOR([0.99, 0.91, 0.98]))
+# assume this is some sort of network output
+print(scuffedNet([0.1, 0.921, 0.991, 0.111, 0.114]))
